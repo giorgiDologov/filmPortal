@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+	
+	<div class="container">
+		<div class="table-responsive">
+			<table id="filmListTable" class="table table-bordered table-hover table-striped">
+				<thead>
+					<tr>
+						
+						<th>Title</th>
+						<th>Author</th>
+						<th>Category</th>
+						<th>Status</th>
+						<th>Language</th>
+						<th>Publicated</th>
+						<th>In Stock</th>
+						<th>Rented out</th>
+						<th>Operation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="film : ${filmList}">
+						<td><a th:href="@{/film/filmInfo(id=${film.id})}"><span th:text="${film.title}"></span></a></td>
+						<td th:text="${film.author}"></td>
+						<td th:text="${film.category}"></td>
+						<td th:text="${film.filmStatus}"></td>
+						<td th:text="${film.language}"></td>
+						<td th:text="${film.publicationDate}"></td>
+						<td th:text="${film.inStockNumber}"></td>
+						<td th:text="${film.rentedOut}"></td>
+						<td><a th:id="deleteFilm" class="xyz delete-film" th:href="@{/film/delete(id=${film.id})}">delete</a> | <a th:href="@{/film/updateFilm?id=}+${film.id}">update</a> | <a th:if="${film.inStockNumber!=0}" th:href="@{/rentOut?id=}+${film.id}">rent out</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	
+	<div th:replace="common/header :: body-bottom-scripts" />
+	
+	<script>
+		$(document).ready(function() {
+			$("#filmListTable").DataTable({
+				"lengthMenu": [[5,10,15,20,-1],[5,10,15,20,"All"]],
+				"ordering": false,
+				stateSave: true
+			});
+		});
+	</script>
+</body>
+</html>

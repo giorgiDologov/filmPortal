@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+	
+	<div class="container">
+		<div class="table-responsive">
+			<p th:if="${isCustomer == false}"><Strong>No customers in our database!</Strong></p>
+			<table th:if="${isCustomer}" id="filmListTable" class="table table-bordered table-hover table-striped">
+				<thead>
+					<tr>
+						
+						<th>Code</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>ID Card Number</th>
+						<th>Email</th>
+						<th>Bonus points</th>
+						<th>Operation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="customer : ${customerList}">
+						<td th:text="${customer.id}"></td>
+						<td th:text="${customer.firstName}"></td>
+						<td th:text="${customer.LastName}"></td>
+						<td th:text="${customer.idNumber}"></td>
+						<td th:text="${customer.email}"></td>
+						<td th:text="${customer.bonusPoints}"></td>
+						<td><a th:id="deleteCustomer" class="xyz delete-film" th:href="@{/customer/deleteCustomer(id=${customer.id})}">delete</a> | <a th:href="@{/customer/updateCustomer?id=}+${customer.id}">update</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	
+	<div th:replace="common/header :: body-bottom-scripts" />
+	
+	<script>
+		$(document).ready(function() {
+			$("#filmListTable").DataTable({
+				"lengthMenu": [[5,10,15,20,-1],[5,10,15,20,"All"]],
+				"ordering": false,
+				stateSave: true
+			});
+		});
+	</script>
+</body>
+</html>

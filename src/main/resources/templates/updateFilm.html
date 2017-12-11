@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+
+	<div class="container">
+		<div class="row">
+			<form class="form-horizontal" th:action="@{/film/updateFilm}" method="post"
+				enctype="multipart/form-data">
+				<fieldset>
+					<legend class="center-block">
+						Update Film Information<span style="font-size: small"> * is a
+							required field</span>
+					</legend>
+					
+					<input hidden="hidden" name="id" th:value="${film.id}" />
+
+
+					<!-- title -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="title">* Title</label>
+
+						<div class="col-md-8">
+							<input type="text" name="title" class="form-control" id="title"
+								th:value="${film.title}" required="required" placeholder="Title" />
+							<span class="help-block">Title of the film</span>
+						</div>
+					</div>
+
+					<!-- author -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="author">*
+							Author</label>
+						<div class="col-md-8">
+							<input type="text" name="author" class="form-control" id="author"
+								th:value="${film.author}" required="required"
+								placeholder="Author" /> <span class="help-block">Author
+								of the film</span>
+						</div>
+					</div>
+
+					<!-- publication date -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="publicationDate">Publication
+							Date</label>
+						<div class="col-md-8">
+							<input type="date" class="form-control" id="publicationDate"
+								name="publicationDate" th:value="${film.publicationDate}"
+								placeholder="ublication Date" /> <span class="help-block">Publication
+								Date of the film</span>
+						</div>
+					</div>
+					
+					<!-- inStockNumber -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="inStockNumber">In Stock:</label>
+						<div class="col-md-8">
+							<input th:value="${film.inStockNumber}" type="number" step="1"
+								name="inStockNumber" class="form-control" id="inStockNumber" />
+						</div>
+					</div>
+					
+					<!-- rentedOut -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="rentedOut">Rented out:</label>
+							<div class="col-md-8">
+							<input th:value="${film.rentedOut}" type="number" step="1"
+								name="rentedOut" class="form-control" id="rentedOut" /> 
+								</div>
+					</div>
+
+					<!-- language -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="language">Language</label>
+						<div class="col-md-8">
+							<select th:value="${film.language}" id="language" name="language"
+								class="form-control">
+								<option value="english">English</option>
+								<option value="spanish">Spanish</option>
+								<option value="german">German</option>
+								<option value="french">French</option>
+								<option value="russian">Russian</option>
+								<option value="italian">Italian</option>
+								<option value="chinese">Chinese</option>
+							</select>
+						</div>
+					</div>
+
+					<!-- category -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="category">*
+							Category</label>
+						<div class="col-md-8">
+							<select th:value="${film.category}" id="category" name="category"
+								class="form-control">
+								<option value="" selected="selected" disabled="disabled">Please
+									select an option...</option>
+								<option value="Action"
+									th:selected="(${film.category}=='Action')">Action</option>
+								<option value="Thriller"
+									th:selected="(${film.category}=='Thriller')">Thriller</option>
+								<option value="Sci-Fi"
+									th:selected="(${film.category}=='Sci-Fi')">Sci-Fi</option>
+								<option value="Romantic"
+									th:selected="(${film.category}=='Romantic')">Romantic</option>
+								<option value="Horror"
+									th:selected="(${film.category}=='Horror')">Horror</option>
+							</select>
+						</div>
+					</div>
+					
+					<!-- filmStatus -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="filmStatus">*
+							Status</label>
+						<div class="col-md-8">
+							<select th:value="${film.filmStatus}" id="filmStatus" name="filmStatus"
+								class="form-control">
+								<option value="" selected="selected" disabled="disabled">Please
+									select an option...</option>
+								<option value="NEW"
+									th:selected="(${film.filmStatus}=='Action')">New</option>
+								<option value="REGULAR"
+									th:selected="(${film.filmStatus}=='Thriller')">Regular</option>
+								<option value="OLD"
+									th:selected="(${film.filmStatus}=='Sci-Fi')">Old</option>
+								
+							</select>
+						</div>
+					</div>
+
+					<!-- description -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="description">Description</label>
+						<div class="col-md-8">
+							<textarea name="description" rows="5" class="form-control"
+								id="description" th:value="${film.description}"
+								placeholder="Description" ></textarea>
+							<span class="help-block">Description of the film</span>
+						</div>
+					</div>
+
+						<!-- upload image -->
+					<div class="form-group">
+						<div class="col-md-2">
+							<label for="image">Upload film image</label>
+						</div>
+						<div class="col-md-8">
+							<input id="image" type="file" name="image"
+								th:value="${film.image}" />
+						</div>
+					</div>
+
+
+
+
+					<div class="form-group">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<button type="submit" class="btn btn-success">Update Film</button>
+							<a class="btn btn-danger" th:href="@{/film/filmInfo(id=${film.id})}">Cancel</a>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+</body>
+</html>

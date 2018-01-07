@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/videodata
+    username: root
+    password: Belz1234
+    platform: mysql
+    initialize: false
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      dialect: org.hibernate.dialect.MySQLInnoDBDialect
+      generate-ddl: true
+      ddl-auto : create
+      hbm2ddl.auto : create
+management.security.enabled : false
+---
+spring:
+  profiles: container
+  datasource:
+    url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+  initialize: true
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      dialect: org.hibernate.dialect.MySQLInnoDBDialect
+      generate-ddl: true
+      ddl-auto : create
+      hbm2ddl.auto : create
+management.security.enabled : false

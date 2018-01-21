@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  videodata-postgres:
+    image: postgres
+    ports:
+     - "5432:5432"
+    environment:
+     - POSTGRES_PASSWORD=password
+     - POSTGRES_USER=postgres
+     - POSTGRES_DB=videodata
+    
+  adminportal-web-app:
+    image: giorgidologov/adminportal-web-app
+    depends_on:
+      - videodata-postgres
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_HOST=videodata-postgres
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=password
+      - DATABASE_NAME=videodata
+      - DATABASE_PORT=5432
+

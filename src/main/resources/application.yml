@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/videodata
+    username: postgres
+    password: password
+    dirverClassName: org.postgresql.Driver
+    tomcat.default-auto-commit: false 
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      hikari.autoCommit: false
+      dialect: org.hibernate.dialect.PostgreSQL82Dialect
+      default_schema: schemaName
+      generate-ddl: true
+      ddl-auto : create-drop
+      hbm2ddl.auto : create-drop
+      management.security.enabled : false
+---
+spring:
+  profiles: container
+  datasource:
+    url: jdbc:postgresql://videodata-postgres:5432/videodata
+    username: postgres
+    password: password
+    dirverClassName: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQL82Dialect
+      generate-ddl: true
+      ddl-auto : create-drop
+      hbm2ddl.auto : create-drop

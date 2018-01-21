@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+	
+	<div class="container">
+		<div>
+			<ol class="breadcrumb">
+				<li><a th:href="@{/film/filmList}"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>Go back</a></li>
+				<li><a th:href="@{/film/updateFilm?id=}+${film.id}">Edit</a></li>
+			</ol>
+			
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-3">
+				<div class="panel panel-default">
+				<div class="panel-body"> <!-- "@{/imageController/}+${film.id}" -->
+					<img th:src="@{/imageController/}+${film.id}" class="img-responsive center-block" />
+				</div>
+				</div>
+			</div>
+			<div class="col-xs-9">
+				<h3 th:text="${film.title}"></h3>
+				<div class="row">
+					<div class="col-xs-6">
+						<p><strong>Title: </strong><span th:text="${film.title}"></span></p>
+						<p><strong>Author: </strong><span th:text="${film.author}"></span></p>
+						<p><strong>Publication Date: </strong><span th:text="${film.publicationDate}"></span></p>
+						<p><strong>Language: </strong><span th:text="${film.language}"></span></p>
+						<p><strong>Category: </strong><span th:text="${film.category}"></span></p>
+						<p><strong>Status: </strong><span th:text="${film.status}"></span></p>
+					</div>
+					<div class="col-xs-6">
+						<p><strong>In Stock: </strong><span th:text="${film.inStockNumber}"></span></p>
+						<p><strong>Rented Out: </strong><span th:text="${film.rentedOut}"></span></p>
+					</div>
+				</div>
+				
+				<p><Strong>Description: </Strong><span th:utext="${film.description}"></span></p>
+			</div>
+			
+		</div>
+	</div>
+	
+					
+					
+					
+					
+					
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+	
+		<script>
+		$(document).ready(function() {
+			$("#filmListTable").DataTable({
+				"lengthMenu": [[5,10,15,20,-1],[5,10,15,20,"All"]],
+				"ordering": false,
+				stateSave: true
+			});
+		});
+	</script>
+	
+</body>
+</html>

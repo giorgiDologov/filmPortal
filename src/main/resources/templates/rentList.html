@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+	
+	<div class="container">
+		<legend th:if="${message!=null}" th:text="${message}"></legend>
+		<div class="table-responsive">
+			<p th:if="${isRental == false}"><Strong>No rent data in our database!</Strong></p>
+			<table th:if="${isRental == true}"  id="filmListTable" class="table table-bordered table-hover table-striped">
+				<thead>
+					<tr>
+						
+						<th>Code</th>
+						<th>Film</th>
+						<th>Customer Name</th>
+						<th>Rent Date</th>
+						<th>Estimated Return Date</th>
+						<th>Film Status</th>
+						<th>Final Return Date</th>
+						<th>Final Price</th>
+						<th>Operation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="rental : ${rentalList}">
+						<td th:text="${rental.id}"></td>
+						<td th:text="${rental.film.title}"></td>
+						<td><a th:href="@{/customerRental(id=${rental.customer.id})}"><span th:text="${rental.customer.firstName + ' ' + rental.customer.lastName}"></span></a></td>
+						<td th:text="${rental.rentOut}"></td>
+						<td th:text="${rental.estimatedReturn}"></td>
+						<td th:text="${rental.film.status}"></td>
+						<td th:text="${rental.finalReturn}"></td>
+						<td th:text="${rental.price.finalPrice} + ' SEK'"></td>
+						<td><a th:id="deleteRental" class="xyz delete-film" th:href="@{/deleteRental(id=${rental.id})}">delete</a> | <a th:href="@{/finishRental?id=}+${rental.id}">finish</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	
+	<div th:replace="common/header :: body-bottom-scripts" />
+	
+	<script>
+		$(document).ready(function() {
+			$("#filmListTable").DataTable({
+				"lengthMenu": [[5,10,15,20,-1],[5,10,15,20,"All"]],
+				"ordering": false,
+				stateSave: true
+			});
+		});
+	</script>
+</body>
+</html>

@@ -17,9 +17,11 @@ User made with Spring Security, but created at app.java. Verification e-mails, a
 # how to run & use:
 
 1.: download + unzip
-2.: cd ~/yourInfr/videoportal/target
-3.: docker-compose up
-4.: localhost:8080
-5.: username: robi.raj & pw: p
-6.: create films, users, than rent out films, finish, delete etcetc
+2.: cd ~/yourInfr/filmPortal-master/
+3.: mvn clean package docker:build
+4.: cd ~/yourInfr/filmPortal-master/target
+5.: docker-compose up
+6.: localhost:8080
+7.: username: robi.raj & pw: p
+8.: create films, users, than rent out films, finish, delete etcetc
 

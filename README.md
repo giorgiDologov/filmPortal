@@ -23,5 +23,5 @@ User made with Spring Security, but created at app.java. Verification e-mails, a
 5.: docker-compose up
 6.: localhost:8080
 7.: username: robi.raj & pw: p
-8.: create films, users, than rent out films, finish, delete etcetc
+8.: create films, users, than rent out films, finish, delete etc...
 
